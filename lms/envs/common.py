@@ -1761,7 +1761,7 @@ STUDIO_NAME = 'Studio'
 STUDIO_SHORT_NAME = 'Studio'
 
 # Site info
-SITE_NAME = "localhost"
+SITE_NAME = "Qiutian's Custom Open edX Instance"
 HTTPS = 'on'
 ROOT_URLCONF = 'lms.urls'
 # NOTE: Please set ALLOWED_HOSTS to some sane value, as we do not allow the default '*'
