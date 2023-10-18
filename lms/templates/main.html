@@ -237,6 +237,15 @@ from common.djangoapps.pipeline_mako import render_require_js_path_overrides
   <script type="text/javascript" src="${js}"></script>
   % endfor
   % endif
+
+<!-- Floated Widget with Google Form -->
+<div style="position:fixed; bottom:10px; right:10px; z-index:1000; width:300px; height:400px;">
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfOBdWHVTgkdrVG4mY_7vcxn4bfoERdoXKLRF97MuuExBvfWg/viewform?embedded=true" 
+            width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">
+        Loading…
+    </iframe>
+</div>
+
 </body>
 </html>
 
