@@ -14,10 +14,10 @@
 % if course_discovery_enabled:
 <%block name="header_extras">
   % for template_name in ["course_card", "filter_bar", "filter", "facet", "facet_option"]:
-<script id="${template_name}-tpl" type="text/template">
- <%static:include path="discovery/${template_name}.underscore" />
-</script>
-% endfor
+  <script type="text/template" id="${template_name}-tpl">
+      <%static:include path="discovery/${template_name}.underscore" />
+  </script>
+  % endfor
   <%static:require_module module_name="js/discovery/discovery_factory" class_name="DiscoveryFactory">
     DiscoveryFactory(
       ${course_discovery_meanings | n, dump_js_escaped_json},
@@ -25,36 +25,31 @@
       "${user_language | n, js_escaped_string}",
       "${user_timezone | n, js_escaped_string}"
     );
-<%static:require_module>
-<%block>
+  </%static:require_module>
+</%block>
 % endif
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<%block name="pagetitle">${_("Courses")}
-<%block>
-<main aria-label="Content" id="main" tabindex="-1">
- <section class="find-courses">
-  <section class="courses-container">
-   % if course_discovery_enabled:
-   <div aria-label="course" class="wrapper-search-context" id="discovery-form" role="search">
-    <div class="search-status-label" id="discovery-message">
-    </div>
-    <form class="wrapper-search-input">
-     <label class="sr" for="discovery-input">
-      ${_('Search for a course')}
-     </label>
-     <!DOCTYPE html>
-     <html lang="en">
-      <head>
-       <meta charset="utf-8"/>
-       <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-       <title>
-        Filter-Search-Sort Component
-       </title>
-       <!-- Including the 'Inter' font -->
-       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
-       <style>
+<%block name="pagetitle">${_("Courses")}</%block>
+
+<main id="main" aria-label="Content" tabindex="-1">
+    <section class="find-courses">
+      <section class="courses-container">
+        % if course_discovery_enabled:
+        <div id="discovery-form" role="search" aria-label="course" class="wrapper-search-context">
+          <div id="discovery-message" class="search-status-label"></div>
+          <form class="wrapper-search-input">
+            <label for="discovery-input" class="sr">${_('Search for a course')}</label>
+            <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter-Search-Sort Component</title>
+    <!-- Including the 'Inter' font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
         body {
             font-family: 'Inter', sans-serif;
         }
@@ -130,6 +125,12 @@
             height: 24px;
         }
 
+        .search-input {
+        width: 100%;
+        box-sizing: border-box;
+        }
+
+
         .magnifier-icon {
             width: 24px;
             height: 24px;
@@ -187,79 +188,44 @@
             display: flex; /* Add flex display to horizontally align Sort By text and dropdown */
             align-items: center; /* Vertically align the items in center */
         }
-       </style>
-      </head>
-      <body>
-       <div class="container">
+    </style>
+</head>
+
+<body>
+    <div class="container">
         <!-- Filter Section -->
         <div class="buttons">
-         <!-- Filter Box with Icon and Count -->
-         <img alt="Filter Icon" class="faders" src="/Users/l/edx-platform/lms/templates/custom_components/filter_icon.png"/>
-         <span class="filter-text">
-          Filter
-         </span>
-         <div style="background: #FEEBEE; padding: 4px 6px;">
-          <span style="font-weight: 600; font-size: 12px; color: #ED4338;">
-           3
-          </span>
-         </div>
+            <!-- Filter Box with Icon and Count -->
+            <img src="/Users/l/edx-platform/lms/templates/custom_components/filter_icon.png" alt="Filter Icon" class="faders">
+            <span class="filter-text">Filter</span>
+            <div style="background: #FEEBEE; padding: 4px 6px;">
+                <span style="font-weight: 600; font-size: 12px; color: #ED4338;">3</span>
+            </div>
         </div>
+
         <!-- Search Bar -->
         <div class="search-container">
-         <div class="search-info">
-          <!-- Magnifier Icon -->
-          <img alt="Search Icon" class="magnifier-icon" src="/Users/l/edx-platform/lms/templates/custom_components/magnifier.png"/>
-          <!-- Search Input -->
-          <input class="search-input" placeholder="What do you want to learn..." type="text"/>
-         </div>
+            <div class="search-info">
+                <!-- Magnifier Icon -->
+                <img src="/Users/l/edx-platform/lms/templates/custom_components/magnifier.png" alt="Search Icon" class="magnifier-icon">
+                <!-- Search Input -->
+                <input type="text" class="search-input" placeholder="What do you want to learn...">
+            </div>
         </div>
+
         <!-- Sort By Dropdown -->
         <div class="sort-section">
-         <span class="sort-by-label">
-          Sort by:
-         </span>
-         <select class="sort-dropdown">
-          <!-- Add options here -->
-         </select>
+            <span class="sort-by-label">Sort by:</span>
+            <select class="sort-dropdown">
+                <!-- Add options here -->
+            </select>
         </div>
-       </div>
-      </body>
-     </html>
-    </form>
-   </div>
-   <div class="filters hide-phone is-collapsed" id="filter-bar">
-   </div>
-   % endif
-   <div aria-label="${_('List of Courses')}" class="courses${'' if course_discovery_enabled else ' no-course-discovery'}" role="region">
-    <ul class="courses-listing courses-list">
-     %for course in courses:
-     <li class="courses-listing-item">
-      <%include file="../course.html" args="course=course" />
-     </li>
-     %endfor
-    </ul>
-   </div>
-   % if course_discovery_enabled:
-   <aside aria-label="${_('Refine Your Search')}" class="search-facets phone-menu">
-    <h2 class="header-search-facets">
-     ${_('Refine Your Search')}
-    </h2>
-    <section class="search-facets-lists">
-=======
-=======
->>>>>>> parent of 61c4a5a59ba (change search bar in courses.html)
-<%block name="pagetitle">${_("Courses")}</%block>
+    </div>
+</body>
 
-<main id="main" aria-label="Content" tabindex="-1">
-    <section class="find-courses">
-      <section class="courses-container">
-        % if course_discovery_enabled:
-        <div id="discovery-form" role="search" aria-label="course" class="wrapper-search-context">
-          <div id="discovery-message" class="search-status-label"></div>
-          <form class="wrapper-search-input">
-            <label for="discovery-input" class="sr">${_('Search for a course')}</label>
-            <input id="discovery-input" class="discovery-input" placeholder="${_('Search for a course')}" type="text"/>
-            <button type="submit" class="button postfix discovery-submit" title="${_('Search')}">
+</html>
+
+            <!-- <button type="submit" class="button postfix discovery-submit" title="${_('Search')}">
               <span class="icon fa fa-search" aria-hidden="true"></span>
               <div aria-live="polite" aria-relevant="all">
                 <div id="loading-indicator" class="loading-spinner hidden">
@@ -267,7 +233,7 @@
                   <span class="sr">${_('Loading')}</span>
                 </div>
               </div>
-            </button>
+            </button> -->
           </form>
         </div>
 
@@ -295,10 +261,5 @@
         % endif
 
       </section>
->>>>>>> parent of 61c4a5a59ba (change search bar in courses.html)
     </section>
-   </aside>
-   % endif
-  </section>
- </section>
 </main>
