@@ -35,25 +35,12 @@
     <section class="find-courses">
       <section class="courses-container">
         % if course_discovery_enabled:
-        <!-- <div id="discovery-form" role="search" aria-label="course" class="wrapper-search-context">
+        <div id="discovery-form" role="search" aria-label="course" class="wrapper-search-context">
           <div id="discovery-message" class="search-status-label"></div>
           <form class="wrapper-search-input">
             <label for="discovery-input" class="sr">${_('Search for a course')}</label>
             <input id="discovery-input" class="discovery-input" placeholder="${_('Search for a course')}" type="text"/>
-            
-
-            <button type="submit" class="button postfix discovery-submit" title="${_('Search')}">
-              <span class="icon fa fa-search" aria-hidden="true"></span>
-              <div aria-live="polite" aria-relevant="all">
-                <div id="loading-indicator" class="loading-spinner hidden">
-                  <span class="icon fa fa-spinner fa-spin" aria-hidden="true"></span>
-                  <span class="sr">${_('Loading')}</span>
-                </div>
-              </div>
-            </button>
-          </form>
-        </div> -->
-        <!DOCTYPE html>
+            <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -126,8 +113,7 @@
             width: 389px;
             height: 48px;
             background: #FFFFFF;
-            border: none;
-            /* 1px solid #E9EAF0; */
+            border: 1px solid #E9EAF0;
         }
 
         .search-info {
@@ -159,7 +145,6 @@
 
         .search-input:focus {
             outline: none;
-            border:none;
         }
 
         .sort-by-label {
@@ -198,13 +183,6 @@
             display: flex; /* Add flex display to horizontally align Sort By text and dropdown */
             align-items: center; /* Vertically align the items in center */
         }
-
-        /* For instance, if the demo course has a specific class or ID that's hidden: */
-      .course {
-          display: block !important;
-          visibility: visible !important;
-      }
-
     </style>
 </head>
 
@@ -213,7 +191,7 @@
         <!-- Filter Section -->
         <div class="buttons">
             <!-- Filter Box with Icon and Count -->
-            <img src="../static/images/filter_icon.png" alt="Filter Icon" class="faders">
+            <img src="/Users/l/edx-platform/lms/templates/custom_components/filter_icon.png" alt="Filter Icon" class="faders">
             <span class="filter-text">Filter</span>
             <div style="background: #FEEBEE; padding: 4px 6px;">
                 <span style="font-weight: 600; font-size: 12px; color: #ED4338;">3</span>
@@ -224,7 +202,7 @@
         <div class="search-container">
             <div class="search-info">
                 <!-- Magnifier Icon -->
-                <img src="../static/images/magnifier.png" alt="Search Icon" class="magnifier-icon">
+                <img src="/Users/l/edx-platform/lms/templates/custom_components/magnifier.png" alt="Search Icon" class="magnifier-icon">
                 <!-- Search Input -->
                 <input type="text" class="search-input" placeholder="What do you want to learn...">
             </div>
@@ -242,6 +220,17 @@
 
 </html>
 
+            <button type="submit" class="button postfix discovery-submit" title="${_('Search')}">
+              <span class="icon fa fa-search" aria-hidden="true"></span>
+              <div aria-live="polite" aria-relevant="all">
+                <div id="loading-indicator" class="loading-spinner hidden">
+                  <span class="icon fa fa-spinner fa-spin" aria-hidden="true"></span>
+                  <span class="sr">${_('Loading')}</span>
+                </div>
+              </div>
+            </button>
+          </form>
+        </div>
 
         <div id="filter-bar" class="filters hide-phone is-collapsed">
         </div>
