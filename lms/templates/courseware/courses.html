@@ -1,53 +1,58 @@
-&lt;%page expression_filter="h"/&gt;
-&lt;%!
+<%page expression_filter="h"/>
+<%!
   import json
   from django.utils.translation import ugettext as _
   from openedx.core.djangolib.js_utils import js_escaped_string, dump_js_escaped_json
-%&gt;
-&lt;%inherit file="../main.html" /&gt;
-&lt;%
+%>
+<%inherit file="../main.html" />
+<%
   course_discovery_enabled = settings.FEATURES.get('ENABLE_COURSE_DISCOVERY')
-%&gt;
+%>
 
-&lt;%namespace name='static' file='../static_content.html'/&gt;
+<%namespace name='static' file='../static_content.html'/>
 
 % if course_discovery_enabled:
-&lt;%block name="header_extras"&gt;
+<%block name="header_extras">
   % for template_name in ["course_card", "filter_bar", "filter", "facet", "facet_option"]:
-  <script id="${template_name}-tpl" type="text/template">
-      <%static:include path="discovery/${template_name}.underscore" />
-  </script>
-  % endfor
-  &lt;%static:require_module module_name="js/discovery/discovery_factory" class_name="DiscoveryFactory"&gt;
+<script id="${template_name}-tpl" type="text/template">
+ <%static:include path="discovery/${template_name}.underscore" />
+</script>
+% endfor
+  <%static:require_module module_name="js/discovery/discovery_factory" class_name="DiscoveryFactory">
     DiscoveryFactory(
       ${course_discovery_meanings | n, dump_js_escaped_json},
       getParameterByName('search_query'),
       "${user_language | n, js_escaped_string}",
       "${user_timezone | n, js_escaped_string}"
     );
-  <!--%static:require_module-->
+<!--%static:require_module-->
 <!--%block-->
 % endif
 
-&lt;%block name="pagetitle"&gt;${_("Courses")}<!--%block-->
+<%block name="pagetitle">${_("Courses")}
+<!--%block-->
 <main aria-label="Content" id="main" tabindex="-1">
-<section class="find-courses">
-<section class="courses-container">
-        % if course_discovery_enabled:
-        <div aria-label="course" class="wrapper-search-context" id="discovery-form" role="search">
-<div class="search-status-label" id="discovery-message"></div>
-<form class="wrapper-search-input">
-<label class="sr" for="discovery-input">${_('Search for a course')}</label>
-<!DOCTYPE html>
-
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Filter-Search-Sort Component</title>
-<!-- Including the 'Inter' font -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
-<style>
+ <section class="find-courses">
+  <section class="courses-container">
+   % if course_discovery_enabled:
+   <div aria-label="course" class="wrapper-search-context" id="discovery-form" role="search">
+    <div class="search-status-label" id="discovery-message">
+    </div>
+    <form class="wrapper-search-input">
+     <label class="sr" for="discovery-input">
+      ${_('Search for a course')}
+     </label>
+     <!DOCTYPE html>
+     <html lang="en">
+      <head>
+       <meta charset="utf-8"/>
+       <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+       <title>
+        Filter-Search-Sort Component
+       </title>
+       <!-- Including the 'Inter' font -->
+       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+       <style>
         body {
             font-family: 'Inter', sans-serif;
         }
@@ -180,64 +185,67 @@
             display: flex; /* Add flex display to horizontally align Sort By text and dropdown */
             align-items: center; /* Vertically align the items in center */
         }
-    </style>
-</head>
-<body>
-<div class="container">
-<!-- Filter Section -->
-<div class="buttons">
-<!-- Filter Box with Icon and Count -->
-<img alt="Filter Icon" class="faders" src="/Users/l/edx-platform/lms/templates/custom_components/filter_icon.png"/>
-<span class="filter-text">Filter</span>
-<div style="background: #FEEBEE; padding: 4px 6px;">
-<span style="font-weight: 600; font-size: 12px; color: #ED4338;">3</span>
-</div>
-</div>
-<!-- Search Bar -->
-<div class="search-container">
-<div class="search-info">
-<!-- Magnifier Icon -->
-<img alt="Search Icon" class="magnifier-icon" src="/Users/l/edx-platform/lms/templates/custom_components/magnifier.png"/>
-<!-- Search Input -->
-<input class="search-input" placeholder="What do you want to learn..." type="text"/>
-</div>
-</div>
-<!-- Sort By Dropdown -->
-<div class="sort-section">
-<span class="sort-by-label">Sort by:</span>
-<select class="sort-dropdown">
-<!-- Add options here -->
-</select>
-</div>
-</div>
-</body>
-</html>
-
-</form>
-</div>
-<div class="filters hide-phone is-collapsed" id="filter-bar">
-</div>
-        % endif
-
-        <div aria-label="${_('List of Courses')}" class="courses${'' if course_discovery_enabled else ' no-course-discovery'}" role="region">
-<ul class="courses-listing courses-list">
-            %for course in courses:
-            <li class="courses-listing-item">
-              &lt;%include file="../course.html" args="course=course" /&gt;
-            </li>
-            %endfor
-          </ul>
-</div>
-
-
-        % if course_discovery_enabled:
-        <aside aria-label="${_('Refine Your Search')}" class="search-facets phone-menu">
-<h2 class="header-search-facets">${_('Refine Your Search')}</h2>
-<section class="search-facets-lists">
-</section>
-</aside>
-        % endif
-
-      </section>
-</section>
+       </style>
+      </head>
+      <body>
+       <div class="container">
+        <!-- Filter Section -->
+        <div class="buttons">
+         <!-- Filter Box with Icon and Count -->
+         <img alt="Filter Icon" class="faders" src="/Users/l/edx-platform/lms/templates/custom_components/filter_icon.png"/>
+         <span class="filter-text">
+          Filter
+         </span>
+         <div style="background: #FEEBEE; padding: 4px 6px;">
+          <span style="font-weight: 600; font-size: 12px; color: #ED4338;">
+           3
+          </span>
+         </div>
+        </div>
+        <!-- Search Bar -->
+        <div class="search-container">
+         <div class="search-info">
+          <!-- Magnifier Icon -->
+          <img alt="Search Icon" class="magnifier-icon" src="/Users/l/edx-platform/lms/templates/custom_components/magnifier.png"/>
+          <!-- Search Input -->
+          <input class="search-input" placeholder="What do you want to learn..." type="text"/>
+         </div>
+        </div>
+        <!-- Sort By Dropdown -->
+        <div class="sort-section">
+         <span class="sort-by-label">
+          Sort by:
+         </span>
+         <select class="sort-dropdown">
+          <!-- Add options here -->
+         </select>
+        </div>
+       </div>
+      </body>
+     </html>
+    </form>
+   </div>
+   <div class="filters hide-phone is-collapsed" id="filter-bar">
+   </div>
+   % endif
+   <div aria-label="${_('List of Courses')}" class="courses${'' if course_discovery_enabled else ' no-course-discovery'}" role="region">
+    <ul class="courses-listing courses-list">
+     %for course in courses:
+     <li class="courses-listing-item">
+      <%include file="../course.html" args="course=course" />
+     </li>
+     %endfor
+    </ul>
+   </div>
+   % if course_discovery_enabled:
+   <aside aria-label="${_('Refine Your Search')}" class="search-facets phone-menu">
+    <h2 class="header-search-facets">
+     ${_('Refine Your Search')}
+    </h2>
+    <section class="search-facets-lists">
+    </section>
+   </aside>
+   % endif
+  </section>
+ </section>
 </main>
