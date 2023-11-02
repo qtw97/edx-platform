@@ -201,7 +201,7 @@
         <!-- Filter Section -->
         <div class="buttons">
             <!-- Filter Box with Icon and Count -->
-            <img src="../static/images/filter_icon.pn" alt="Filter Icon" class="faders">
+            <img src="../static/images/filter_icon.png" alt="Filter Icon" class="faders">
             <span class="filter-text">Filter</span>
             <div style="background: #FEEBEE; padding: 4px 6px;">
                 <span style="font-weight: 600; font-size: 12px; color: #ED4338;">3</span>
@@ -215,7 +215,12 @@
               <img src="../static/images/magnifier.png" alt="Search Icon" class="magnifier-icon">
           </button>                
           <!-- Search Input -->
-          <input type="text"class="search-input" placeholder="Search for a course" />
+          <!-- <div id="discovery-form" role="search" aria-label="course" class="wrapper-search-context"> -->
+            <div id="discovery-message" class="search-status-label"></div>
+          <form class="wrapper-search-input">
+          <input id="discovery-input" type="text" class="search-input" placeholder="Search for a course" />
+        </form>
+        <!-- </div> -->
         </div>
         </div>
 
