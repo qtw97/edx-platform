@@ -680,10 +680,10 @@ FEATURES = {
     'ENABLE_TEAMS': True,
     
     # Filter feature of the filter bar
-    'ENABLE_FILTER': True,
+    'ENABLE_FILTER': False,
 
     # Sort by feature of the filter bar
-    'ENABLE_SORTBY': True,
+    'ENABLE_SORTBY': False,
 
     # Show video bumper in LMS
     'ENABLE_VIDEO_BUMPER': False,
